@@ -3,9 +3,8 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from data import GridElement
 from counter import Time
-# from ranking import Rank
 from database.rank import Database
-import threading
+
 DICTIONARY_ICONES = {
     1: './icones/1.png',
     2: './icones/2.png',
@@ -45,9 +44,7 @@ class Game(QMainWindow):
                 for y in range(len(self.gui.btn)):
                     self.gui.btn[i][y].setEnabled(False)
             self.gui.pushButton_3.setEnabled(False)
-            # print(okPressed)
-            # print(text, self.gui.label_5.text())
-            if okPressed == True:
+            if okPressed == True and len(text) > 0:
                 self.data.insert(text, self.gui.label_5.text())
             self.showtable()
     def setupButton(self):
@@ -141,6 +138,7 @@ class Game(QMainWindow):
             self.listClick.append(index)
 
     def reset(self):
+        self.showtable()
         self.gridele = GridElement(self)
         self.resetGrid()
         self.gui.flagreset = True
@@ -148,6 +146,7 @@ class Game(QMainWindow):
             for y in range(len(self.gui.btn)):
                 self.gui.btn[i][y].setEnabled(True)
         self.gui.pushButton_3.setEnabled(True)
+        self.gui.label_5.setText("0")
     def showtable(self):
         self.gui.tableWidget.setRowCount(0)
         for value in self.data.select():

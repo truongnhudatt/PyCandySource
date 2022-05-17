@@ -1,5 +1,6 @@
 from random import randint
 
+
 class Element:
     def __init__(self):
         self.type = randint(1, 6)
@@ -12,15 +13,15 @@ class Element:
 
 
 class GridElement:
-    def __init__(self,args):
+    def __init__(self, args):
         self.args = args
         self.scores = 0
-        flag = True
-        while flag:
+        self.flag = True
+        while self.flag:
             self.grid = [[Element() for _ in range(8)] for _ in range(8)]
             self.visited = [[0 for _ in range(len(self.grid))]
                             for _ in range(len(self.grid))]
-            flag = self.setupgrid()
+            self.flag = self.setupgrid()
 
     def setupgrid(self):
         for i in range(len(self.grid)):
@@ -42,6 +43,7 @@ class GridElement:
             self.swap(i, y, k, l)
         self.scores += self.comboCrush()
         self.args.gui.label_5.setText(str(self.scores))
+
     def swap(self, i, y, k, l):
         if abs(i - k) + abs(y - l) == 1:
             tmp = self.getitem(i, y)
@@ -49,7 +51,7 @@ class GridElement:
             self.setitem(k, l, tmp)
 
     def resetVisited(self):
-        self.visited = [[0 for _ in range(len(self.grid))] for _x in range(len(self.grid))]
+        self.visited = [[0 for _ in range(len(self.grid))] for _ in range(len(self.grid))]
 
     def getPosRemove(self, x, y, value):
         if 0 <= x < 9 and 0 <= y < 9:
@@ -67,11 +69,13 @@ class GridElement:
         if self.crush(i, y):
             for point in range(len(self.visited)):
                 if self.detectItem(point):
+
                     count = self.getAllItemRemove(point)
+
                     if count[1] > 0:
                         for it in reversed(range(count[1])):
+                            # it = 2
                             self.setitem(it + count[0], point, randint(1, 6))
-                            self.setitem(it, point, randint(1, 6))
                             score += 1
                     else:
                         for it in range(count[0]):
@@ -93,7 +97,7 @@ class GridElement:
         return False
 
     def getAllItemRemove(self, x):
-        count = [0, 8]
+        count = [0, 7]
         for p in range(len(self.visited)):
             if self.visited[p][x] == 1:
                 count = [count[0] + 1, min(count[1], p)]

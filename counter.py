@@ -9,10 +9,10 @@ class Time(QThread):
         self.args = args
 
     def run(self):
-        cnt = 5
+        cnt = 30
         while True:
             if self.args.gui.flagreset == True:
-                cnt = 10
+                cnt = 30
                 self.args.gui.flagreset = False
             cnt -= 1
             while True:

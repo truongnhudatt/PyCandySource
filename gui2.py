@@ -132,7 +132,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Candy Crush Saga"))
         self.label_2.setText(_translate("MainWindow", "Time"))
-        self.label_3.setText(_translate("MainWindow", "10"))
+        self.label_3.setText(_translate("MainWindow", "30"))
         self.label_4.setText(_translate("MainWindow", "Score"))
         self.label_5.setText(_translate("MainWindow", "0"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Rank"))
